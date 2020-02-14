@@ -10,6 +10,7 @@ scripts                  # Script files
 style                    # CSS files
 browse.html              # Browse feature
 index.html               # Main page
+add.html		 # Add feature
 hello.java
 .gitignore
 README.txt
