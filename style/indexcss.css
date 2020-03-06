@@ -1,0 +1,10 @@
+.browseNavBar {
+    position: relative;
+    height: 40vh;
+    margin-top: .5rem;
+    overflow: auto;
+}
+
+.affix {
+    top: 0;
+}

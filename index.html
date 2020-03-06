@@ -16,10 +16,31 @@
                     font-size: 25;
                 }
             </style>
+
+            <!----------------------------------------------->
+            <!-- CSS: Bootstrap, Firebase, other API -->
+            <!----------------------------------------------->
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-
+            Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+            <!-- Our own stylesheet -->
+            <link rel="stylesheet" type="text/css" href="style/indexcss.css">
         </head>
 
         <body>
-            <p><a href="browse.html">Kevin - Browse</a></p>>
+            <!----------------------------------------------->
+            <!-- JS: Boostrap, Firebase, API related    -->
+            <!----------------------------------------------->
+            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+            <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+            <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+            <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+            <script src="scripts/firebase_api_carly.js"> </script>
 
             <p>MICHAEL LIN</p>
             <div>
@@ -33,6 +54,65 @@
             <div>
                 <a href="add.html">
                     <p id="page">Add an Item</p>
+            </div>
+
+            <!-- This is the search bar. We need to fix this as we scroll.-->
+            <div id = "searchbar" data-spy="affix" data-offset-top="0">
+
+            </div>
+
+            <!-- This is the browse section. It should affix as we scroll, or be its on sections -->
+            
+            <div id = "browse">
+                <nav id="browse-navbar" class="navbar navbar-dark bg-dark">
+                    <h3 class="navbar-brand">Browse</h3>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item"><a class="nav-link" href="#common">Common</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#suggested">Suggested</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#history">Previously Searched</a></li>
+                    </ul>
+                </nav>
+
+                <div data-spy="scroll" data-target="#browse-navbar" data-offset="0" class="browseNavBar">
+                    <div class="card" id="common">
+                        <div class="card-body">
+                          <h4 class="card-title">Commonly Searched for Items</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                          <p class="card-text">
+                            <br> <br> <br> <br>
+                            <!-- put table scroll thingie here -->
+                          </p>
+                          <a href="#!" class="card-link">Card link</a>
+                          <a href="#!" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                    <!-- put table scroll thingie here -->
+                    <div class="card" id="suggested">
+                        <div class="card-body">
+                          <h4 class="card-title">Suggested Items</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                          <p class="card-text">
+                              <br> <br> <br> <br>
+                            <!-- put table scroll thingie here -->
+                          </p>
+                          <a href="#!" class="card-link">Card link</a>
+                          <a href="#!" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                    
+                    <div class="card" id="history">
+                        <div class="card-body">
+                          <h4 class="card-title">Your Previous Searches</h4>
+                          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                          <p class="card-text">
+                            <br> <br> <br> <br>
+                            <!-- put table scroll thingie here -->
+                          </p>
+                          <a href="#!" class="card-link">Card link</a>
+                          <a href="#!" class="card-link">Another link</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <script>
 
