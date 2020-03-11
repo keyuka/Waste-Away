@@ -13,6 +13,9 @@
             <!--  Meta tag for rendering on mobile devices -->
             <!----------------------------------------------->
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" type="text/css" href="style/indexcss.css">
+
+
 
             <style>
                 #page {
@@ -60,30 +63,26 @@
             <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
             <script src="scripts/firebase_api_carly.js"> </script>
 
-<<<<<<< HEAD
-            <h1>Waste Away</h1>
+            <h1 id="wasteAway">Waste Away</h1>
             <!-- This is the search bar. We need to fix this as we scroll.-->
             <div>
                 <form class="form-inline d-flex justify-content-center md-form form-sm">
-                    <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-                        aria-label="Search">
+                    <input id="searchBar" type="text" placeholder="Search" aria-label="Search">
                     <i class="fas fa-search" aria-hidden="true"></i>
+                    <button id="searchButton">Search</button>
                 </form>
-=======
-        
-
->>>>>>> 52feeb2654852b8ad6a905a7e3e6f0ec423b9a14
             </div>
 
 
-            <div>
+            <div id="addItem">
                 <a href="add.html">
-                    <p id="page">Add an Item</p>
+                <p>Add Item</p>
+                </a>
             </div>
-
-            <div>
+            <div id="login">
                 <a href="login.html">
-                    <p id="page">Login</p>
+                <p>Login</p>
+                </a>
             </div>
 
 

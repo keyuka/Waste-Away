@@ -5,6 +5,29 @@
     overflow: auto;
 }
 
+#wasteAway{
+    position: relative;
+    text-align: center;
+}
+#addItem{
+position: absolute;
+right: 10%;
+top: 44px;
+}
+
+#login{
+position: absolute;
+right:10%;
+top: 2%;
+
+}
+#searchBar{
+    position: relative;
+}
+#searchButton{
+    position: relative;
+}
+
 #title{
     text-align: center;
 }
@@ -37,7 +60,8 @@
 #submitButton{
   text-align: center;
 }
-    
+
+
     
 
 .affix {
