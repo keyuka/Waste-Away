@@ -4,8 +4,39 @@
     margin-top: .5rem;
     overflow: auto;
 }
- 
 
+#title{
+    text-align: center;
+}
+
+#image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+#item{
+    width: 95%;
+}
+#method{
+    height: 20%;
+    width: 95%;
+}
+#search{
+
+    width: 95%;
+}
+#locations{
+    width: 95%;
+}
+#addInfo{
+
+    width: 95%;
+}
+
+#submitButton{
+  text-align: center;
+}
     
     
 
