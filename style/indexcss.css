@@ -1,9 +1,72 @@
 .browseNavBar {
     position: relative;
     height: 40vh;
-    margin-top: .5rem;
-    overflow: auto;
+    margin-top: 15px;
+    overflow-y:visible;
 }
+
+#browse {
+    padding-top: 50px;
+}
+
+#wasteAway{
+    position: relative;
+    text-align: center;
+    padding-top: 120px;
+    padding-bottom: 30px;
+}
+
+#addItem{
+position: absolute;
+right: 10px;
+top: 44px;
+}
+
+#login{
+position: absolute;
+right: 10px;
+top: 2%;
+}
+#searchBar{
+    position: relative;
+}
+#searchButton{
+    position: relative;
+}
+
+#title{
+    text-align: center;
+}
+
+#image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    }
+
+#item{
+    width: 95%;
+}
+#method{
+    height: 20%;
+    width: 95%;
+}
+#search{
+
+    width: 95%;
+}
+#locations{
+    width: 95%;
+}
+#addInfo{
+
+    width: 95%;
+}
+
+#submitButton{
+  text-align: center;
+}
+    
 
 .affix {
     top: 0;
