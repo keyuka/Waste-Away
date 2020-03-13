@@ -9,6 +9,16 @@
     padding-top: 50px;
 }
 
+.scrolling-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+.card {
+      flex: 0 0 auto;
+}
+
+
 #wasteAway{
     position: relative;
     text-align: center;
