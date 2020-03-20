@@ -3,16 +3,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Result</title>
+    <link rel="stylesheet" type="text/css" href="style/results.css">
     
 </head>
 <body>
 
     <h2 id = "title">Waste Away</h2>
-    <form class="form-inline d-flex justify-content-center md-form form-sm">
-        <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-          aria-label="Search">
-        <i class="fas fa-search" aria-hidden="true"></i>
+    <div>
+      <form class="form-inline d-flex justify-content-center md-form form-sm">
+          <input id="searchBar" type="text" placeholder="Search for an item..." aria-label="Search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <button id="searchButton">Search</button>
       </form>
+  </div>
     
     <h1>Name of Item</h1>
     
@@ -22,5 +25,6 @@
     <p>1.</p>
     <p>2.</p>
     <p>3.</p>
+    <script src="results.js"></script>
 </body>
 </html>
