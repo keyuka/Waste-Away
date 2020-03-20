@@ -2,10 +2,8 @@
 //placeholder number for testing.
 let contentAmount = 5;
 
-window.onload = function addUserFunctions(){
-    //To test while not logged in, comment out the 2 lines below
-    // let user = firebase.auth().currentUser;
-    // if (user) {
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
         document.getElementById("suggested").innerHTML = '<div class="card-body">'
             + '<h4 class="card-title">Suggested Items</h4>'
             + '<h6 class="card-subtitle mb-2 text-muted">Based on your previous searches</h6>'
@@ -13,7 +11,7 @@ window.onload = function addUserFunctions(){
 
         document.getElementById("history").innerHTML = '<div class="card-body">'
             + '<h4 class="card-title">Your Previous Searches</h4>'
-            + '<h6 class="card-subtitle mb-2 text-muted">For similar items your are throwing out</h6>'
+            + '<h6 class="card-subtitle mb-2 text-muted">A history of your recycling</h6>'
             + '<div id="previous-content"></div></div>';
 
         document.getElementById("login").setAttribute('href', 'HTML/account.html');
@@ -24,11 +22,13 @@ window.onload = function addUserFunctions(){
             + '<li class="nav-item"><a class="nav-link" href="#suggested">Suggested</a></li>'
             + '<li class="nav-item"><a class="nav-link" href="#history">Previously Searched</a></li>';
 
-        this.populateSuggestedContent();
-        this.populateHistory();
+        populateSuggestedContent();
+        populateHistory();
+    } else {
+      // No user is signed in.
     }
-// }
-
+  });
+    
 
 //GENERATE BASED ON SIMILAR ITEMS
 function populateSuggestedContent(){
@@ -65,4 +65,15 @@ function populateHistory(){
     }
     document.getElementById("previous-content").innerHTML =
     '<div class="scrolling-wrapper">' + content + '</div>';
+}
+
+//TODO: MAKE A BUTTON ("Sign Out") DYNAMICALLY CREATED BY JS THAT CALLS THIS
+function signOut() {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        //to return to non-logged in page
+        location.reload;
+      }).catch(function(error) {
+        // An error happened.
+      });
 }
