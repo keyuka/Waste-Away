@@ -1,19 +1,30 @@
-saveFile = function () {
-  
-    const name = document.getElementById("userInput");
-    var userSearch = name.value;
-    console.log(userSearch);
+let userSearch;
 
+//Check to see if hash was passed, then loads corresponding item info.
+window.onload = function(){
+    if (window.location.hash) {
+        console.log("The hash was passed!");
+        userSearch = window.location.hash.substring(1);
+        showItem(userSearch);
+    }
+}
+
+//Initiates item search function.
+document.getElementById("searchButton").onclick = function(){
+    userSearch = document.getElementById("userInput").value;
+    showItem(userSearch);
+};
+
+//Retrieves the item's information from the DB.
+function showItem (userSearch) {
     
     db.collection('items').doc(userSearch).get().then(function (snap) {
         document.getElementById("name").innerHTML = snap.data().name;})
 
     db.collection('items').doc(userSearch).get().then(function (snap) {
-    var img = document.createElement("IMG");
+    let img = document.createElement("IMG");
     img.src = "images/" + snap.data().picture_ref;
     document.getElementById("image").appendChild(img);})
-
-
     
     db.collection('items').doc(userSearch).get().then(function (snap) {
         document.getElementById("location").innerHTML = snap.data().disposal_location;})
@@ -21,10 +32,5 @@ saveFile = function () {
      db.collection('items').doc(userSearch).get().then(function (snap) {
             document.getElementById("method").innerHTML = snap.data().disposal_method;})
 
-         
-            
-
-
-
-    //window.location.href = "HTML/results.html";
 }
+
