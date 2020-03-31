@@ -23,14 +23,16 @@ function showItem (userSearch) {
 
     db.collection('items').doc(userSearch).get().then(function (snap) {
     let img = document.createElement("IMG");
-    img.src = "images/" + snap.data().picture_ref;
+    img.src = "../images/" + snap.data().picture_ref;
     document.getElementById("image").appendChild(img);})
     
     db.collection('items').doc(userSearch).get().then(function (snap) {
-        document.getElementById("location").innerHTML = snap.data().disposal_location;})
+        document.getElementById("location").innerHTML = "Disposal Location: " + snap.data().disposal_location;})
 
      db.collection('items').doc(userSearch).get().then(function (snap) {
-            document.getElementById("method").innerHTML = snap.data().disposal_method;})
+        document.getElementById("method").innerHTML =  "Disposal Method: " + snap.data().disposal_method;})
+
+
 
 }
 
