@@ -2,6 +2,8 @@
 //placeholder number for testing.
 let contentAmount = 5;
 
+document.getElementById("itemInfo").onclick = openItemPage;
+
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         document.getElementById("suggested").innerHTML = '<div class="card-body">'
@@ -76,4 +78,10 @@ function signOut() {
       }).catch(function(error) {
         // An error happened.
       });
+}
+
+//Create sessionStorage item to pass to results page.
+function openItemPage() {
+    userInput = document.getElementById("userInput").value;
+    window.location.href = "HTML/results.html#" + userInput;
 }
