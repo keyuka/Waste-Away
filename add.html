@@ -1,0 +1,171 @@
+<DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+        <title>Add an Item</title>
+    </head>
+
+    <body>
+        <!--Bootstrap copy-->
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+        </script>
+
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
+        <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+        <script src="scripts/firebase_api.js"> </script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-database.js"></script> -->
+
+        <div class="container-fluid">
+            <!-- Add title -->
+
+            <!--Add image here-->
+            <div class="input-group-prepend">
+                <span class="input-group-text">Waste Item Name</span>
+            </div>
+            <div class="input-group input-group-lg">
+                <input type="text" id="wasteIn" class="form-control" aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <br>
+            <!--Disposal Method-->
+            <div class="input-group-prepend">
+                <span class="input-group-text">Dispoal Method</span>
+            </div>
+            <div class="input-group input-group-lg">
+                <input type="text" id="disposalIn" class="form-control" aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <br>
+            <!--Drop down, loop creation in div of disposal locations-->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button type="button" class="btn btn-primary">Other Location</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" id="drop">
+                        <!--Create-->
+                    </div>
+                </div>
+            </div>
+            <span class="input-group-text" id="locationFill">Dispoal Location fill</span>
+            <br>
+            <!--Other disposal locations-->
+            <div class="input-group-prepend">
+                <span class="input-group-text">Other Dispoal Locations</span>
+            </div>
+            <div class="input-group input-group-lg">
+                <input type="text" id="otherIn" class="form-control" aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <br>
+            <!--Additional-->
+            <div class="input-group-prepend">
+                <span class="input-group-text">Additional Information (Optional)</span>
+            </div>
+            <div class="input-group input-group-lg">
+                <input type="text" id="extraIn" class="form-control" aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+            <br>
+            <!--Push to database-->
+            <button type="button" id="sendIn" class="btn btn-success">Send Request</button>
+
+
+        </div>
+        <script>
+            let disposalName = [];
+            let disposalLocation = [];
+
+            function getLocation() {
+                db.collection("depot-info").doc("vancouver-zero-waste").onSnapshot(
+                    function (snap) {
+                        disposalName.push(snap.data().name);
+                        disposalLocation.push(snap.data().address);
+                        console.log(disposalName[0]);
+                        addDrop(disposalName, disposalLocation);
+                    }
+                )
+                /*
+                var query = firebase.database().ref("depot-info").orderByKey();
+                query.once("value")
+                    .then(function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            // key will be "ada" the first time and "alan" the second time
+                            var key = childSnapshot.key;
+                            // childData will be the actual contents of the child
+                            var childData = childSnapshot.val();
+                        });
+                    });*/
+            }
+            getLocation();
+
+            function addDrop(tester, address) {
+                let count = 0;
+                let dropper = document.querySelector('.dropdown-menu');
+                let dropDown = document.querySelector("locationFill");
+                tester.forEach(tester => {
+                    dropper.innerHTML += `<a class="dropdown-item" href="#">${tester}</a>`;
+                    dropper.onclick = function () {
+                        console.log(1);
+                        locationFill.innerHTML = tester + " " + address[0];
+                    }
+                })
+            }
+
+            sendIn.onclick = function send() {
+                let wI = wasteIn.value;
+                let dI = disposalIn.value;
+                let oI = otherIn.value;
+                let eI = extraIn.value;
+                console.log(wI);
+                console.log(dI);
+                console.log(oI);
+                console.log(eI);
+
+                db.collection("requests").doc(wI).set({
+                        name: wI,
+                        disposal_method: dI,
+                        other_location: oI,
+                        extra_info: eI
+                        //tags
+                        //disposal location
+                        //picture
+                    })
+                    .then(function (docRef) {
+                        console.log("Document written with ID: ", wI);
+                        //window.alert("Successfully sent!");
+                        if (window.confirm('Successfully sent')) {
+                            alert('Return home!');
+                            window.location = 'index.html';
+                        } 
+                    })
+                    .catch(function (error) {
+                        console.error("Error adding document: ", error);
+                        window.alert("I have no idea waht went wrong, but something did.");
+                    });
+
+            }
+        </script>
+
+    </body>
+
+    </html>
+</DOCTYPE>
