@@ -76,3 +76,44 @@ top: 2%;
 .affix {
     top: 0;
 }
+#userInput{
+    height: 29px;
+    width: 60%;
+
+}
+
+.searchButton{
+    margin-left:59%;   
+    margin-top: -30px;
+    height:30px;
+    background-color:rgb(68, 136, 68);
+
+
+
+
+}
+#searchFunction{
+    margin-top: 20px;
+    text-align: center;
+
+
+}
+
+
+#title{
+    margin-top: 40px;
+    margin-left: 120px;
+
+}
+
+#logo{
+    margin-top: -70px;
+    margin-left: 10px;
+    height: 100px;
+    width: 100px;
+
+}
+
+#header{
+    margin-top: 70px;
+}
