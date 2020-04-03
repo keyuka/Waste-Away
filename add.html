@@ -29,7 +29,6 @@
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
         <script src="scripts/firebase_api.js"> </script>
-        <!-- <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-database.js"></script> -->
 
         <div class="container-fluid">
             <!-- Add title -->
@@ -95,25 +94,35 @@
             let disposalLocation = [];
 
             function getLocation() {
-                db.collection("depot-info").doc("vancouver-zero-waste").onSnapshot(
-                    function (snap) {
-                        disposalName.push(snap.data().name);
-                        disposalLocation.push(snap.data().address);
-                        console.log(disposalName[0]);
-                        addDrop(disposalName, disposalLocation);
-                    }
-                )
-                /*
-                var query = firebase.database().ref("depot-info").orderByKey();
-                query.once("value")
-                    .then(function (snapshot) {
-                        snapshot.forEach(function (childSnapshot) {
-                            // key will be "ada" the first time and "alan" the second time
-                            var key = childSnapshot.key;
-                            // childData will be the actual contents of the child
-                            var childData = childSnapshot.val();
-                        });
-                    });*/
+
+                db.collection("depot-info").get().then(function (querySnapshot) {
+                    querySnapshot.forEach(function (doc) {
+                        disposalName.push(doc.data().name);
+                        disposalLocation.push(doc.data().address);
+                    })
+                }).then(function (something) {
+                    addDrop(disposalName, disposalLocation);
+                });
+
+                // db.collection("depot-info").doc("vancouver-zero-waste").onSnapshot(
+                //     function (snap) {
+                //         console.log(snap);
+                //         disposalName.push(snap.data().name);
+                //         disposalLocation.push(snap.data().address);
+                //         addDrop(disposalName, disposalLocation);
+                //     }
+                // )
+
+                // var query = firebase.database().ref("depot-info").orderByKey();
+                // query.once("value")
+                //     .then(function (snapshot) {
+                //         snapshot.forEach(function (childSnapshot) {
+                //             // key will be "ada" the first time and "alan" the second time
+                //             var key = childSnapshot.key;
+                //             // childData will be the actual contents of the child
+                //             var childData = childSnapshot.val();
+                //         });
+                //     });
             }
             getLocation();
 
@@ -155,7 +164,7 @@
                         if (window.confirm('Successfully sent')) {
                             alert('Return home!');
                             window.location = 'index.html';
-                        } 
+                        }
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
