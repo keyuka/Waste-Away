@@ -23,10 +23,10 @@ function showItem (userSearch) {
 
     db.collection('items').doc(userSearch).get().then(function (snap) {
         let img = document.createElement("IMG");
-        img.src = "images/" + snap.data().picture_ref;
-
+        img.src = "../images/" + snap.data().picture_ref;
+        img.id = "current";
         if (document.getElementById("image").hasChildNodes()){
-            document.getElementById("image").replaceChild(img);
+            document.getElementById("image").replaceChild(img, document.getElementById("current"));
         } else {
             document.getElementById("image").appendChild(img);
         }
