@@ -4,6 +4,7 @@ const MAXCONTENTAMOUNT = 10;
 const BASECONTENT = 5;
 let commonContent = [];
 let commonCardNumber = 0;
+itemsRef = db.collection("items");
 document.getElementById("itemInfo").onclick = openItemPage;
 
 document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
@@ -39,21 +40,26 @@ document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
   
 
 //!!!!STILL WORKING ON!!!
-window.onload = function(BASECONTENT) {
+window.onload = function() {
+
+    let common = document.getElementById("commonCards");
 
     populateCommon(MAXCONTENTAMOUNT);
-    let common = document.getElementById("commonCards");
-    for (let i = 1; i <= BASECONTENT; i++) {
-        common.innerHTML += '<div class="card">'
-            + '<div class="card-body">'
-            + '<p class="card-text"></p>'
-            + '</div>'
-            + '<img src="/images/pathToYourImage.png" alt="Item 1" id = "common' + i + '">'
-            + '<div class="card-body">'
-            + '<p class="card-text">of a card.</p>'
-            + '</div></div>'
-        commonCardNumber++;
-    }
+    
+    itemsRef.orderBy("visits", "desc").limit(BASECONTENT).get().then(function(querySnapshot) {     
+        querySnapshot.forEach(function(doc) {                
+            common.innerHTML += '<div class="card">'
+                + '<div class="card-body">'
+                + '<p class="card-text">' + doc.data().name + '</p>'
+                + '</div>'
+                + '<img src = "images/' + doc.data().picture_ref + '" width = "100" height = "125" alt="Item 1" id="card' + commonCardNumber + '">'
+                + '<div class="card-body">'
+                + '<p class="card-text">Times Searched: ' + doc.data().visits + '</p>'
+                + '</div></div>'
+
+            commonCardNumber++;
+            });
+    });
 }
 
 //GENERATE BASED ON SIMILAR ITEMS

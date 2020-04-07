@@ -37,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class = "navbar-nav">
                     <a class="nav-item nav-link active" href="#"><span>Home</span> <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="HTML/add.html"><span>Add An Item</span></a>
+                    <a class="nav-item nav-link" href="add.html"><span>Add An Item</span></a>
                     <a class="nav-item nav-link" href="HTML/login.html" id="signin"><span>Login/Create Account</span></a>
                     <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
 
@@ -48,15 +48,18 @@
         <h1 id="wasteAway">Waste Away</h1>
         <!-- This is the search bar. We need to fix this as we scroll.-->
         
-            <div>
+
+        
+          
+            <div id = "searchFunction">
                 <input type="text" id="userInput" placeholder="Search for an item..." />
-                <button id="itemInfo" id="searchButton">Search</button>
+                <button id="itemInfo" class="searchButton">Search</button>
             </div>
         
         <!-- This is the browse section. It should affix as we scroll, or be its on sections -->
 
         <div id="browse">
-            <nav id="browse-navbar" class="navbar navbar-dark bg-dark">
+            <nav id="browse-navbar" class="navbar navbar-light">
                 <h3 class="navbar-brand">Browse</h3>
                 <!--Populated in JS file-->
                 <ul class="nav nav-pills" id="navigation"></ul>

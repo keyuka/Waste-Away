@@ -20,20 +20,29 @@
     <!------------------------>
     <!-- Your own CSS files -->
     <!------------------------>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="../style/indexcss.css">
+    <link rel="stylesheet" href="../style/login.css">
 
 </head>
 <body>
     <!----------------------->
     <!--  HTML Section -->
     <!----------------------->
-
-    <!-- The surrounding HTML is left untouched by FirebaseUI.
-     Your app may use that space for branding, controls and other customizations.-->
-    <h1>Waste Away</h1>
-    <a href=../index.html>
-        <h3>Click to return to homepage.</h3>
-    </a>
+    <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
+        <a class="navbar-brand" href="../index.html">Waste Away</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class = "navbar-nav">
+                <a class="nav-item nav-link" href="../index.html"><span>Home</span> <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="../HTML/add.html"><span>Add An Item</span></a>
+                <a class="nav-item nav-link active" href="../HTML/login.html" id="signin"><span>Login/Create Account</span></a>
+                <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
+            </div>
+        </div>
+    </nav>
+    <h1>Login or Signup</h1>
     <div id="firebaseui-auth-container"></div>
     <div id="loader">Loading...</div>
      
@@ -49,18 +58,8 @@
     <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <script src="../scripts/firebase_api.js"> </script>
-  
-    <!--------------------------------------------------------------------->
-    <!-- JS files: Your own JavaScript functions included here    -->
-    <!--------------------------------------------------------------------->
-    <script src="scripts/login.js"></script>
-
-    <!--------------------------------------------------------------------->
-    <!-- Make calls to your own JavaScript functions, here below-->
-    <!---------------------------------------------------------------------->
 
     <script>
-    
         // Initialize the FirebaseUI Widget using Firebase.
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
         var uiConfig = {
@@ -117,7 +116,7 @@
             tosUrl: 'main.html',
             // Privacy policy url.
             privacyPolicyUrl: 'main.html',
-            accountChooserEnabled: false
+           
         };
         // The start method will wait until the DOM is loaded.
         // Inject the login interface into the HTML

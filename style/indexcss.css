@@ -1,3 +1,7 @@
+body {
+    background-color: white;
+}
+
 .browseNavBar {
     position: relative;
     height: 40vh;
@@ -81,18 +85,57 @@
     transition: 0.2s;
     color: #1d1c02;
     border-radius: 20px 20px;
+    font-weight: 600;
 }
 
 .nav-link span:hover {
     color: #2a7759;
-    font-weight: bold;
+    background-color: #fffcad;
+
 }
 
-.active {
+.active span{
     background-color: #50e194;
-    padding-bottom: 12px;
 }
 
 .noDisplay {
     display:none;
+}
+#userInput{
+    height: 29px;
+    width: 60%;
+
+}
+
+.searchButton{
+    margin-left:59%;   
+    margin-top: -30px;
+    height:30px;
+    background-color:rgb(68, 136, 68);
+
+}
+#searchFunction{
+    margin-top: 20px;
+    text-align: center;
+
+
+}
+
+
+#title{
+    margin-top: 40px;
+    margin-left: 120px;
+
+}
+
+#logo{
+    margin-top: -70px;
+    margin-left: 10px;
+    height: 100px;
+    width: 100px;
+
+}
+
+#header{
+    margin-top: 70px;
 }

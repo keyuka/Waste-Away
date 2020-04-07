@@ -33,10 +33,14 @@ function showItem (userSearch) {
     })
     
     db.collection('items').doc(userSearch).get().then(function (snap) {
-        document.getElementById("location").innerHTML = snap.data().disposal_location;})
+        document.getElementById("disposalLocation").innerHTML = "Disposal Location:";
+        document.getElementById("location").innerHTML =  snap.data().disposal_location;})
 
      db.collection('items').doc(userSearch).get().then(function (snap) {
-            document.getElementById("method").innerHTML = snap.data().disposal_method;})
+        document.getElementById("disposalMethod").innerHTML =  "Disposal Method:";
+        document.getElementById("method").innerHTML =  snap.data().disposal_method;})
+
+
 
 }
 

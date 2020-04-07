@@ -9,6 +9,7 @@
         <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
         <title>Add an Item</title>
+        <link rel="stylesheet" href="style/indexcss.css">
     </head>
 
     <body>
@@ -28,12 +29,29 @@
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-        <script src="/scripts/firebase_api.js"> </script>
+        <script src="scripts/firebase_api.js"> </script>
+
+        <!--Header Navigation Bar-->
+        <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
+            <a class="navbar-brand" href="index.html">Waste Away</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class = "navbar-nav">
+                    <a class="nav-item nav-link" href="index.html"><span>Home</span> <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="HTML/add.html"><span>Add An Item</span></a>
+                    <a class="nav-item nav-link active" href="HTML/login.html" id="signin"><span>Login/Create Account</span></a>
+                    <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
+                </div>
+            </div>
+        </nav>
 
         <div class="container-fluid">
             <!-- Add title -->
 
             <!--Add image here-->
+            <br>
             <div class="input-group-prepend">
                 <span class="input-group-text">Waste Item Name</span>
             </div>
@@ -54,7 +72,7 @@
             <!--Drop down, loop creation in div of disposal locations-->
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <button type="button" class="btn btn-primary">Depot Locations</button>
+                    <button type="button" class="btn btn-primary">Other Location</button>
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
@@ -68,7 +86,7 @@
             <br>
             <!--Other disposal locations-->
             <div class="input-group-prepend">
-                <span class="input-group-text">Other Dispoal Locations (Please leave empty if N/A)</span>
+                <span class="input-group-text">Other Dispoal Locations</span>
             </div>
             <div class="input-group input-group-lg">
                 <input type="text" id="otherIn" class="form-control" aria-label="Large"
@@ -92,7 +110,6 @@
         <script>
             let disposalName = [];
             let disposalLocation = [];
-            let docArray = [];
 
             function getLocation() {
 
@@ -100,69 +117,63 @@
                     querySnapshot.forEach(function (doc) {
                         disposalName.push(doc.data().name);
                         disposalLocation.push(doc.data().address);
-                        docArray.push(doc.data());
-
-                        console.log(docArray);
-                        // console.log(disposalName);
-                        // console.log(disposalLocation);
                     })
                 }).then(function (something) {
-                    addDrop();
+                    addDrop(disposalName, disposalLocation);
                 });
+
+                // db.collection("depot-info").doc("vancouver-zero-waste").onSnapshot(
+                //     function (snap) {
+                //         console.log(snap);
+                //         disposalName.push(snap.data().name);
+                //         disposalLocation.push(snap.data().address);
+                //         addDrop(disposalName, disposalLocation);
+                //     }
+                // )
+
+                // var query = firebase.database().ref("depot-info").orderByKey();
+                // query.once("value")
+                //     .then(function (snapshot) {
+                //         snapshot.forEach(function (childSnapshot) {
+                //             // key will be "ada" the first time and "alan" the second time
+                //             var key = childSnapshot.key;
+                //             // childData will be the actual contents of the child
+                //             var childData = childSnapshot.val();
+                //         });
+                //     });
             }
             getLocation();
 
-            function addDrop() {
-                let dropDD;
+            function addDrop(tester, address) {
+                let count = 0;
                 let dropper = document.querySelector('.dropdown-menu');
                 let dropDown = document.querySelector("locationFill");
-                console.log(disposalName);
-                console.log(disposalLocation);
-                for (let i = 0; i < docArray.length; i++) {
-                    dropper.innerHTML +=
-                        `<a class="dropdown-item" id="d${i}" onclick="workPLEASE(this)">${docArray[i].name}, ${docArray[i].address}</a>`;
-                    // dropDD.onclick = function () {
-                    //     locationFill.innerHTML = docArray[i].name + ", " + docArray[i].address;
-                    //     console.log(i);
-                    //     console.log(this.innerHTML);
-                    // }
-                }
-                /*
-                disposalName.forEach(disposalName => {
-                    dropper.innerHTML += `<a class="dropdown-item" href="#">${disposalName}</a>`;
-
+                tester.forEach(tester => {
+                    dropper.innerHTML += `<a class="dropdown-item" href="#">${tester}</a>`;
                     dropper.onclick = function () {
-                        locationFill.innerHTML = docArray[1].name + ", " + docArray[1].address;
+                        console.log(1);
+                        locationFill.innerHTML = tester + " " + address[0];
                     }
-                }) */
+                })
             }
-            let depotLocation = "";
-            function workPLEASE(item) {
-                console.log(item.innerHTML);
-                locationFill.innerHTML = item.innerHTML;
-                depotLocation = item.innerHTML
-            }
-
 
             sendIn.onclick = function send() {
                 let wI = wasteIn.value;
                 let dI = disposalIn.value;
                 let oI = otherIn.value;
                 let eI = extraIn.value;
-                let depot = depotLocation;
                 console.log(wI);
                 console.log(dI);
                 console.log(oI);
                 console.log(eI);
-                console.log(depot);
 
                 db.collection("requests").doc(wI).set({
                         name: wI,
                         disposal_method: dI,
-                        disposal_location: depot + oI,
                         other_location: oI,
                         extra_info: eI
                         //tags
+                        //disposal location
                         //picture
                     })
                     .then(function (docRef) {
@@ -170,7 +181,7 @@
                         //window.alert("Successfully sent!");
                         if (window.confirm('Successfully sent')) {
                             alert('Return home!');
-                            window.location = '/index.html';
+                            window.location = 'index.html';
                         }
                     })
                     .catch(function (error) {

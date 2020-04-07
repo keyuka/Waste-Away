@@ -15,13 +15,13 @@
     <!-- CSS: Bootstrap, Firebase, other API -->
     <!----------------------------------------------->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-
-        Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <link rel="stylesheet" type="text/css" href="../style/indexcss.css">
 </head>
 
 <body>
-
+    
     
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related        -->
@@ -42,8 +42,29 @@
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <script src="../scripts/firebase_api.js"> </script>
 
+    <!--HTML-->
+    <!--Navigation bar-->
+    <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
+        <a class="navbar-brand" href="index.html">Waste Away</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class = "navbar-nav">
+                <a class="nav-item nav-link active" href="#"><span>Home</span> <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="add.html"><span>Add An Item</span></a>
+                <a class="nav-item nav-link" href="HTML/login.html" id="signin"><span>Login/Create Account</span></a>
+                <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
+
+            </div>
+        </div>
+    </nav>
+
+    <!--Page contents-->
     <h2 id="title">Waste Away</h2>
-    <div>
+    <img id = "logo" src = "../images/logo.png">
+
+    <div id = "searchFunction">
         <input type="text" id="userInput" placeholder="Search for an item..." />
         <button id="searchButton">Search</button>
     </div>
@@ -51,7 +72,9 @@
     <div>
         <p id="name"></p>
         <p id="image"></p>
+        <p id="disposalLocation"></p>
         <p id="location"></p>
+        <p id="disposalMethod"></p>
         <p id="method"></p>
     </div>
 
