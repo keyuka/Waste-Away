@@ -30,28 +30,30 @@
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
         <script src="scripts/firebase_api.js"> </script>
-
         <!--Header Navigation Bar-->
         <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
             <a class="navbar-brand" href="index.html">Waste Away</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class = "navbar-nav">
-                    <a class="nav-item nav-link" href="index.html"><span>Home</span> <span class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="HTML/add.html"><span>Add An Item</span></a>
-                    <a class="nav-item nav-link active" href="HTML/login.html" id="signin"><span>Login/Create Account</span></a>
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="index.html"><span>Home</span> <span
+                            class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="add.html"><span>Add An Item</span></a>
+                    <a class="nav-item nav-link active" href="HTML/login.html" id="signin"><span>Login/Create
+                            Account</span></a>
                     <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
                 </div>
             </div>
         </nav>
 
+
         <div class="container-fluid">
             <!-- Add title -->
 
             <!--Add image here-->
-            <br>
             <div class="input-group-prepend">
                 <span class="input-group-text">Waste Item Name</span>
             </div>
@@ -65,14 +67,13 @@
                 <span class="input-group-text">Dispoal Method</span>
             </div>
             <div class="input-group input-group-lg">
-                <input type="text" id="disposalIn" class="form-control" aria-label="Large"
-                    aria-describedby="inputGroup-sizing-sm">
+                <textarea id="disposalIn" rows="3" class="form-control" aria-label="With textarea"></textarea>
             </div>
             <br>
             <!--Drop down, loop creation in div of disposal locations-->
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <button type="button" class="btn btn-primary">Other Location</button>
+                    <button type="button" class="btn btn-primary">Depot Locations</button>
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="sr-only">Toggle Dropdown</span>
@@ -81,12 +82,15 @@
                         <!--Create-->
                     </div>
                 </div>
+                <!--Gets locations-->
+                <div class="input-group input-group-lg">
+                    <textarea id="locationFill" rows="3" class="form-control" aria-label="With textarea"
+                        readonly></textarea>
+                </div>
             </div>
-            <span class="input-group-text" id="locationFill">Dispoal Location fill</span>
-            <br>
             <!--Other disposal locations-->
             <div class="input-group-prepend">
-                <span class="input-group-text">Other Dispoal Locations</span>
+                <span class="input-group-text">Other Dispoal Locations (Please leave empty if N/A)</span>
             </div>
             <div class="input-group input-group-lg">
                 <input type="text" id="otherIn" class="form-control" aria-label="Large"
@@ -98,8 +102,7 @@
                 <span class="input-group-text">Additional Information (Optional)</span>
             </div>
             <div class="input-group input-group-lg">
-                <input type="text" id="extraIn" class="form-control" aria-label="Large"
-                    aria-describedby="inputGroup-sizing-sm">
+                <textarea id="extraIn" class="form-control" aria-label="With textarea"></textarea>
             </div>
             <br>
             <!--Push to database-->
@@ -108,53 +111,61 @@
 
         </div>
         <script>
-            let disposalName = [];
-            let disposalLocation = [];
+            let docArray = [];
 
             function getLocation() {
 
                 db.collection("depot-info").get().then(function (querySnapshot) {
                     querySnapshot.forEach(function (doc) {
-                        disposalName.push(doc.data().name);
-                        disposalLocation.push(doc.data().address);
+                        docArray.push(doc.data());
                     })
                 }).then(function (something) {
-                    addDrop(disposalName, disposalLocation);
+                    console.log(docArray);
+                    addDrop();
                 });
-
-                // db.collection("depot-info").doc("vancouver-zero-waste").onSnapshot(
-                //     function (snap) {
-                //         console.log(snap);
-                //         disposalName.push(snap.data().name);
-                //         disposalLocation.push(snap.data().address);
-                //         addDrop(disposalName, disposalLocation);
-                //     }
-                // )
-
-                // var query = firebase.database().ref("depot-info").orderByKey();
-                // query.once("value")
-                //     .then(function (snapshot) {
-                //         snapshot.forEach(function (childSnapshot) {
-                //             // key will be "ada" the first time and "alan" the second time
-                //             var key = childSnapshot.key;
-                //             // childData will be the actual contents of the child
-                //             var childData = childSnapshot.val();
-                //         });
-                //     });
             }
             getLocation();
 
-            function addDrop(tester, address) {
-                let count = 0;
+            function addDrop() {
                 let dropper = document.querySelector('.dropdown-menu');
-                let dropDown = document.querySelector("locationFill");
-                tester.forEach(tester => {
-                    dropper.innerHTML += `<a class="dropdown-item" href="#">${tester}</a>`;
-                    dropper.onclick = function () {
-                        console.log(1);
-                        locationFill.innerHTML = tester + " " + address[0];
+                for (let i = 0; i < docArray.length; i++) {
+                    dropper.innerHTML +=
+                        `<a class="dropdown-item" id="d${i}" onclick="addDepot(this)">${docArray[i].name} - ${docArray[i].address}</a>`;
+                }
+            }
+            //Contains depot locations
+            let depotLocations = [];
+
+            function addDepot(item) {
+                //checks if depot is already in string, pushes if not
+                let count = 0;
+                if (depotLocations.length < 1) {
+                    depotLocations.push(item.innerHTML);
+                } else {
+                    for (let i = 0; i < depotLocations.length; i++) {
+                        if (depotLocations[i] === item.innerHTML) {
+                            count++;
+                        }
                     }
-                })
+                    if (count == 0) {
+                        depotLocations.push(item.innerHTML);
+                    } else {
+                        count = 0;
+                    }
+                }
+                let areas = "";
+                for (let i = 0; i < depotLocations.length; i++) {
+                    areas += (i + 1) + ". " + depotLocations[i] + "\n";
+                }
+                console.log(depotLocations);
+                locationFill.value = areas;
+            }
+
+            //-----------------------------------------------------------
+            function getTags() {
+                //add textbox for tags
+                //Get string and remove everything but words and store them into array 
+                //add array to tags
             }
 
             sendIn.onclick = function send() {
@@ -162,18 +173,18 @@
                 let dI = disposalIn.value;
                 let oI = otherIn.value;
                 let eI = extraIn.value;
+                depotLocations.push(oI);
                 console.log(wI);
                 console.log(dI);
                 console.log(oI);
                 console.log(eI);
-
                 db.collection("requests").doc(wI).set({
                         name: wI,
                         disposal_method: dI,
+                        disposal_locations: depotLocations,
                         other_location: oI,
                         extra_info: eI
                         //tags
-                        //disposal location
                         //picture
                     })
                     .then(function (docRef) {
@@ -188,7 +199,6 @@
                         console.error("Error adding document: ", error);
                         window.alert("I have no idea waht went wrong, but something did.");
                     });
-
             }
         </script>
 
