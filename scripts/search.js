@@ -22,17 +22,21 @@ function showItem (userSearch) {
         document.getElementById("name").innerHTML = snap.data().name;})
 
     db.collection('items').doc(userSearch).get().then(function (snap) {
-    let img = document.createElement("IMG");
-    img.src = "../images/" + snap.data().picture_ref;
-    document.getElementById("image").appendChild(img);})
+        let img = document.createElement("IMG");
+        img.src = "images/" + snap.data().picture_ref;
+
+        if (document.getElementById("image").hasChildNodes()){
+            document.getElementById("image").replaceChild(img);
+        } else {
+            document.getElementById("image").appendChild(img);
+        }
+    })
     
     db.collection('items').doc(userSearch).get().then(function (snap) {
-        document.getElementById("location").innerHTML = "Disposal Location: " + snap.data().disposal_location;})
+        document.getElementById("location").innerHTML = snap.data().disposal_location;})
 
      db.collection('items').doc(userSearch).get().then(function (snap) {
-        document.getElementById("method").innerHTML =  "Disposal Method: " + snap.data().disposal_method;})
-
-
+            document.getElementById("method").innerHTML = snap.data().disposal_method;})
 
 }
 
