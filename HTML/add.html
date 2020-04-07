@@ -47,8 +47,7 @@
                 <span class="input-group-text">Dispoal Method</span>
             </div>
             <div class="input-group input-group-lg">
-                <input type="text" id="disposalIn" class="form-control" aria-label="Large"
-                    aria-describedby="inputGroup-sizing-sm">
+                <textarea id="disposalIn" rows="3" class="form-control" aria-label="With textarea"></textarea>
             </div>
             <br>
             <!--Drop down, loop creation in div of disposal locations-->
@@ -63,9 +62,11 @@
                         <!--Create-->
                     </div>
                 </div>
+                <!--Gets locations-->
+                <div class="input-group input-group-lg">
+                    <textarea id="locationFill" rows="3" class="form-control" aria-label="With textarea" readonly></textarea>
+                </div>
             </div>
-            <span class="input-group-text" id="locationFill">Dispoal Location fill</span>
-            <br>
             <!--Other disposal locations-->
             <div class="input-group-prepend">
                 <span class="input-group-text">Other Dispoal Locations (Please leave empty if N/A)</span>
@@ -80,8 +81,7 @@
                 <span class="input-group-text">Additional Information (Optional)</span>
             </div>
             <div class="input-group input-group-lg">
-                <input type="text" id="extraIn" class="form-control" aria-label="Large"
-                    aria-describedby="inputGroup-sizing-sm">
+                <textarea id="extraIn" class="form-control" aria-label="With textarea"></textarea>
             </div>
             <br>
             <!--Push to database-->
@@ -90,66 +90,68 @@
 
         </div>
         <script>
-            let disposalName = [];
-            let disposalLocation = [];
             let docArray = [];
 
             function getLocation() {
 
                 db.collection("depot-info").get().then(function (querySnapshot) {
                     querySnapshot.forEach(function (doc) {
-                        disposalName.push(doc.data().name);
-                        disposalLocation.push(doc.data().address);
                         docArray.push(doc.data());
-
-                        console.log(docArray);
-                        // console.log(disposalName);
-                        // console.log(disposalLocation);
                     })
                 }).then(function (something) {
+                    console.log(docArray);
                     addDrop();
                 });
             }
             getLocation();
 
             function addDrop() {
-                let dropDD;
                 let dropper = document.querySelector('.dropdown-menu');
-                let dropDown = document.querySelector("locationFill");
-                console.log(disposalName);
-                console.log(disposalLocation);
                 for (let i = 0; i < docArray.length; i++) {
                     dropper.innerHTML +=
-                        `<a class="dropdown-item" id="d${i}" onclick="workPLEASE(this)">${docArray[i].name}, ${docArray[i].address}</a>`;
-                    // dropDD.onclick = function () {
-                    //     locationFill.innerHTML = docArray[i].name + ", " + docArray[i].address;
-                    //     console.log(i);
-                    //     console.log(this.innerHTML);
-                    // }
+                        `<a class="dropdown-item" id="d${i}" onclick="addDepot(this)">${docArray[i].name} - ${docArray[i].address}</a>`;
                 }
-                /*
-                disposalName.forEach(disposalName => {
-                    dropper.innerHTML += `<a class="dropdown-item" href="#">${disposalName}</a>`;
-
-                    dropper.onclick = function () {
-                        locationFill.innerHTML = docArray[1].name + ", " + docArray[1].address;
+            }
+            //Contains depot locations
+            let depotLocations = [];
+            function addDepot(item) {
+                //checks if depot is already in string, pushes if not
+                let count = 0;
+                if (depotLocations.length < 1) {
+                    depotLocations.push(item.innerHTML);
+                } else {
+                    for (let i = 0; i < depotLocations.length; i++) {
+                        if (depotLocations[i] === item.innerHTML) {
+                            count++;
+                        }
                     }
-                }) */
-            }
-            let depotLocation = "";
-            function workPLEASE(item) {
-                console.log(item.innerHTML);
-                locationFill.innerHTML = item.innerHTML;
-                depotLocation = item.innerHTML
+                    if (count == 0) {
+                        depotLocations.push(item.innerHTML);
+                    } else {
+                        count = 0;
+                    }
+                }
+                let areas = "";
+                for (let i = 0; i < depotLocations.length; i++) {
+                    areas += (i + 1) + ". " + depotLocations[i] + "\n";
+                }
+                console.log(depotLocations);
+                locationFill.value = areas;
             }
 
+            //-----------------------------------------------------------
+            function getTags() {
+                //add textbox for tags
+                //Get string and remove everything but words and store them into array 
+                //add array to tags
+            }
 
             sendIn.onclick = function send() {
                 let wI = wasteIn.value;
                 let dI = disposalIn.value;
                 let oI = otherIn.value;
                 let eI = extraIn.value;
-                let depot = depotLocation;
+                let depot = depotLocations;
                 console.log(wI);
                 console.log(dI);
                 console.log(oI);
@@ -159,7 +161,7 @@
                 db.collection("requests").doc(wI).set({
                         name: wI,
                         disposal_method: dI,
-                        disposal_location: depot + oI,
+                        disposal_locations: depot + oI,
                         other_location: oI,
                         extra_info: eI
                         //tags
