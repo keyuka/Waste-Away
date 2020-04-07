@@ -17,26 +17,27 @@ document.getElementById("searchButton").onclick = function(){
 
 //Retrieves the item's information from the DB.
 function showItem (userSearch) {
-    
-    db.collection('items').doc(userSearch).get().then(function (snap) {
+
+    db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
         document.getElementById("name").innerHTML = snap.data().name;})
 
-    db.collection('items').doc(userSearch).get().then(function (snap) {
+    db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
         let img = document.createElement("IMG");
-        img.src = "images/" + snap.data().picture_ref;
+        img.src = "../images/" + snap.data().picture_ref;
 
-        if (document.getElementById("image").hasChildNodes()){
+
+        if (document.getElementById("image").hasChildNodes()){+
             document.getElementById("image").replaceChild(img);
         } else {
             document.getElementById("image").appendChild(img);
         }
     })
     
-    db.collection('items').doc(userSearch).get().then(function (snap) {
+    db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
         document.getElementById("disposalLocation").innerHTML = "Disposal Location:";
         document.getElementById("location").innerHTML =  snap.data().disposal_location;})
 
-     db.collection('items').doc(userSearch).get().then(function (snap) {
+     db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
         document.getElementById("disposalMethod").innerHTML =  "Disposal Method:";
         document.getElementById("method").innerHTML =  snap.data().disposal_method;})
 
