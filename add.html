@@ -26,10 +26,12 @@
         </script>
 
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-storage.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-auth.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.9.2/firebase-firestore.js"></script>
         <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
         <script src="scripts/firebase_api.js"> </script>
+
         <!--Header Navigation Bar-->
         <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
             <a class="navbar-brand" href="index.html">Waste Away</a>
@@ -49,11 +51,18 @@
             </div>
         </nav>
 
-
         <div class="container-fluid">
-            <!-- Add title -->
-
+            <br>
             <!--Add image here-->
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="wasteImg">Waste Item image</span>
+            </div>
+            <input type="file" accept="image/*" capture="camera" id="imageIn">
+            <br>
+            <img id="displayImg" src="#" style="display:none">
+            <br>
+            <br>
+            <!--Waste item name-->
             <div class="input-group-prepend">
                 <span class="input-group-text">Waste Item Name</span>
             </div>
@@ -64,10 +73,18 @@
             <br>
             <!--Disposal Method-->
             <div class="input-group-prepend">
-                <span class="input-group-text">Dispoal Method</span>
+                <span class="input-group-text">Disposal Method</span>
             </div>
             <div class="input-group input-group-lg">
                 <textarea id="disposalIn" rows="3" class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <br>
+            <!--Tags-->
+            <div class="input-group-prepend">
+                <span class="input-group-text">Add Tags (Use comma to seperate)</span>
+            </div>
+            <div class="input-group input-group-lg">
+                <textarea id="tagIn" rows="2" class="form-control" aria-label="With textarea"></textarea>
             </div>
             <br>
             <!--Drop down, loop creation in div of disposal locations-->
@@ -111,10 +128,17 @@
 
         </div>
         <script>
+            let storageRef = firebase.storage().ref('request_images');
+            let fileUpload = document.getElementById("imageIn");
+
+            fileUpload.addEventListener('change', function (evt) {
+                let firstFile = evt.target.files[0] // upload the first file only
+                let uploadTask = storageRef.put(firstFile)
+                console.log(1);
+            })
             let docArray = [];
 
             function getLocation() {
-
                 db.collection("depot-info").get().then(function (querySnapshot) {
                     querySnapshot.forEach(function (doc) {
                         docArray.push(doc.data());
@@ -133,6 +157,26 @@
                         `<a class="dropdown-item" id="d${i}" onclick="addDepot(this)">${docArray[i].name} - ${docArray[i].address}</a>`;
                 }
             }
+            //gets image
+            document.getElementById('imageIn').onchange = function (evt) {
+                let tgt = evt.target || window.event.srcElement,
+                    files = tgt.files;
+
+                // FileReader support
+                if (FileReader && files && files.length) {
+                    let fr = new FileReader();
+                    fr.onload = function () {
+                        document.getElementById("displayImg").src = fr.result;
+                        document.getElementById("displayImg").style = "display:block";
+                    }
+                    fr.readAsDataURL(files[0]);
+                }
+                // Not supported
+                else {
+                    document.getElementById("wasteImg").innerHTML = "Browser does not support image upload";
+                }
+            }
+
             //Contains depot locations
             let depotLocations = [];
 
@@ -162,13 +206,17 @@
             }
 
             //-----------------------------------------------------------
+            let tagList = [];
+
             function getTags() {
-                //add textbox for tags
                 //Get string and remove everything but words and store them into array 
+                let tags = tagIn.value.replace(/ /g, '');
                 //add array to tags
+                tagList = tags.split(',');
             }
 
             sendIn.onclick = function send() {
+                getTags();
                 let wI = wasteIn.value;
                 let dI = disposalIn.value;
                 let oI = otherIn.value;
@@ -176,15 +224,16 @@
                 depotLocations.push(oI);
                 console.log(wI);
                 console.log(dI);
+                console.log(tagList);
                 console.log(oI);
                 console.log(eI);
                 db.collection("requests").doc(wI).set({
                         name: wI,
                         disposal_method: dI,
                         disposal_locations: depotLocations,
+                        tags: tagList,
                         other_location: oI,
                         extra_info: eI
-                        //tags
                         //picture
                     })
                     .then(function (docRef) {
