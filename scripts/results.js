@@ -20,15 +20,6 @@ loadbutton.addEventListener("click",function(){
   });
 });
 
-db.collection("items").where(userSearch.toLowerCase(), "==", true)
-    .get()
-    .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-        });
-    })
-
 //Add button if user is logged in.
 document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
 
