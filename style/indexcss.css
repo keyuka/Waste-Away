@@ -18,6 +18,7 @@
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .card {
@@ -31,6 +32,11 @@
     padding-bottom: 10px;
 }
 
+h5{
+    position: relative;
+    text-align: center;
+}
+
 #searchBar{
     position: relative;
 }
@@ -38,38 +44,18 @@
     position: relative;
 }
 
-
-
 #image{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    }
+}
 
 #item{
     width: 95%;
 }
 
-#search{
-
-    width: 95%;
-}
-#locations{
-    width: 95%;
-}
-#addInfo{
-
-    width: 95%;
-}
-
 #submitButton{
-  text-align: center;
-}
-
-.affix {
-    top: 0;
-    width: 100%;
-    z-index: 9999;
+    text-align: center;
 }
 
 .cardindex {
@@ -114,7 +100,6 @@
 #userInput{
     height: 29px;
     width: 60%;
-
 }
 
 .searchButton{
@@ -124,18 +109,15 @@
     background-color:rgb(68, 136, 68);
 
 }
+
 #searchFunction{
     margin-top: 20px;
     text-align: center;
-
-
 }
-
 
 #title{
     margin-top: 40px;
     margin-left: 120px;
-
 }
 
 #logo{
@@ -143,11 +125,6 @@
     margin-left: 10px;
     height: 100px;
     width: 100px;
-
-}
-
-#header{
-    margin-top: 70px;
 }
 
 @media only screen and (max-width: 400px) {

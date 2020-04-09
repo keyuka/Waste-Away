@@ -21,8 +21,8 @@ document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById("signout").classList.remove("noDisplay");
     
         document.getElementById("navigation").innerHTML = 
-            '<li class="nav-item"><a class="nav-link" href="#common">Common</a></li>'
-            + '<li class="nav-item"><a class="nav-link" href="#history">Previously Searched</a></li>';
+            '<li class="nav-item"><a class="nav-link" href="#common" >Common Items</a></li>'
+            + '<li class="nav-item"><a class="nav-link" href="#history">Previously Recycled</a></li>';
         populateHistory();
     } else {
       // No user is signed in.
@@ -69,7 +69,7 @@ function populateHistory(){
         + '<tbody id="tbody"></tbody>'
     + '</table>'
 
-    userItemRef.orderBy("recycleNum", "desc").limit(BASECONTENT).get().then(function(querySnapshot) {     
+    userItemRef.orderBy("recycleNum", "desc").get().then(function(querySnapshot) {     
         querySnapshot.forEach(function(doc) {  
                 let lower = doc.data().name;
                 let upper = lower.charAt(0).toUpperCase() + lower.substring(1);          
