@@ -43,8 +43,8 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="index.html"><span>Home</span> <span
                             class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link active" href="add.html"><span>Add An Item</span></a>
-                    <a class="nav-item nav-link" href="HTML/login.html" id="signin"><span>Login/Create
+                   <a class="nav-item nav-link" href="add.html"><span>Add An Item</span></a>
+                    <a class="nav-item nav-link active" href="HTML/login.html" id="signin"><span>Login/Create
                             Account</span></a>
                     <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
                 </div>
@@ -113,7 +113,7 @@
             </div>
             <!--Other disposal locations-->
             <div class="input-group-prepend">
-                <span class="input-group-text">Other Disposal Locations (Please leave empty if N/A)</span>
+                <span class="input-group-text">Other Dispoal Locations (Please leave empty if N/A)</span>
             </div>
             <div class="input-group input-group-lg">
                 <input type="text" id="otherIn" class="form-control" aria-label="Large"
@@ -157,7 +157,6 @@
                         docArray.push(doc.data());
                     })
                 }).then(function (something) {
-                    console.log(docArray);
                     addDrop();
                 });
             }
@@ -251,6 +250,7 @@
                         other_location: oI,
                         extra_info: eI,
                         picture_ref: reference
+
                     })
                     .then(function (docRef) {
                         console.log("Document written with ID: ", wI);
