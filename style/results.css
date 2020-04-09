@@ -59,6 +59,11 @@
 
 }
 
+#i{
+    width: 10000%;
+    height: auto;
+}
+
 #disposalMethod{
     margin-bottom: 1px;
     margin-top: 20px;

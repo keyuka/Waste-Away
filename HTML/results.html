@@ -6,10 +6,10 @@
     <title>Result</title>
 
     <!----------------------------------------------->
-        <!--  Meta tag for rendering on mobile devices -->
-        <!----------------------------------------------->
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" type="text/css" href="../style/results.css">
+    <!--  Meta tag for rendering on mobile devices -->
+    <!----------------------------------------------->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="../style/results.css">
 
     <!----------------------------------------------->
     <!-- CSS: Bootstrap, Firebase, other API -->
@@ -21,8 +21,8 @@
 </head>
 
 <body>
-    
-    
+
+
     <!----------------------------------------------->
     <!-- JS: Boostrap, Firebase, API related        -->
     <!----------------------------------------------->
@@ -46,12 +46,14 @@
     <!--Navigation bar-->
     <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
         <a class="navbar-brand" href="../index.html">Waste Away</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <div class = "navbar-nav">
-                <a class="nav-item nav-link" href="../index.html"><span>Home</span> <span class="sr-only">(current)</span></a>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="../index.html"><span>Home</span> <span
+                        class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="../add.html"><span>Add An Item</span></a>
                 <a class="nav-item nav-link" href="../HTML/login.html" id="signin"><span>Login/Create Account</span></a>
                 <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
@@ -61,24 +63,38 @@
     </nav>
 
     <!--Page contents-->
-    <h2 id="title">Waste Away</h2>
-    <img id = "logo" src = "../images/logo.png">
-
-    <div id = "searchFunction">
+    <div class="container">
+        <h2 id="title">Waste Away</h2>
+        <img id="logo" src="../images/logo.png">
+    </div class="container">
+    <div id="searchFunction">
         <input type="text" id="userInput" placeholder="Search for an item..." />
         <button id="searchButton">Search</button>
     </div>
 
-    <div>
+    <div class="container">
         <p id="name"></p>
+    </div>
+    <div class="container">
         <p id="image"></p>
+    </div>
+    <div class="container">
         <p id="disposalLocation"></p>
+    </div>
+    <div class="container">
         <p id="location"></p>
+    </div>
+    <div class="container">
         <p id="disposalMethod"></p>
+    </div>
+    <div class="container">
         <p id="method"></p>
     </div>
+
+
 
     <script src="../scripts/search.js"></script>
 
 </body>
+
 </html>

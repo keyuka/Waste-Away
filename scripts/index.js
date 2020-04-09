@@ -116,10 +116,7 @@ function openItemPage() {
     window.location.href = "HTML/results.html#" + userInput;
 }
 
-function openResultsPage() {
-    userInput = document.getElementById("userInput").value;
-    window.location.href = "HTML/searchResults.html?" + userInput;
-}
+
 
 //Populate a section with n number of most popular items.
 
