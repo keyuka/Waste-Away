@@ -42,8 +42,9 @@ function showItem(userSearch) {
 
 
     db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
-        document.getElementById("location").innerHTML = snap.data().disposal_location;
         document.getElementById("disposalLocation").innerHTML = "Disposal Location:";
+        document.getElementById("location").innerHTML = snap.data().disposal_location;
+        
    
     }).catch(function (error) {
         console.log("Could not find Item: ", error);
@@ -51,8 +52,10 @@ function showItem(userSearch) {
 
 
     db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
-        document.getElementById("method").innerHTML = snap.data().disposal_method;
         document.getElementById("disposalMethod").innerHTML = "Disposal Method:";
+      
+        document.getElementById("method").innerHTML = snap.data().disposal_method;
+
       
     }).catch(function (error) {
         console.log("Could not find Item: ", error);
