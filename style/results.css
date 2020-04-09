@@ -6,7 +6,6 @@
 #title{
     margin-top: 40px;
     margin-left: 120px;
-
 }
 
 #logo{
@@ -14,12 +13,11 @@
     margin-left: 10px;
     height: 100px;
     width: 100px;
-
 }
+
 #userInput{
     height: 29px;
     width: 60%;
-
 }
 
 #searchButton{
@@ -27,20 +25,14 @@
     margin-top: -30px;
     height:30px;
     background-color:rgb(68, 136, 68);
-
-
-
-
 }
+
 #searchFunction{
     margin-top: 20px;
     margin-left: 10px;
-
-
 }
 
 #name{
-  
     margin-top: 10px;
     margin-left: 10px;
     font-size: 25px;
@@ -51,15 +43,11 @@
     margin-top: 40px;
     margin-left: 10px;
     margin-bottom: 1px;
-
     font-size: 20px;
-
 }
 
 #location{
-    
     margin-left: 10px;
-
 }
 
 #i{
@@ -72,9 +60,8 @@
     margin-top: 20px;
     margin-left: 10px;
     font-size: 20px;
-
 }
+
 #method{
     margin-left: 10px;
-
 }

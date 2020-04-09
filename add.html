@@ -267,6 +267,12 @@
                         window.alert("I have no idea what went wrong, but something did.");
                     });
             }
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    document.getElementById("signin").classList.add("noDisplay");
+                    document.getElementById("signout").classList.remove("noDisplay");
+                }
+            });
         </script>
 
     </body>

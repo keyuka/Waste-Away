@@ -14,7 +14,6 @@ loadbutton.addEventListener("click",function(){
                showat2.innerHTML += myData.dname+" "+myData.dno+myData.no ;  
                   inputTextField.innerHTML = " ";
         }                  
-
       });
     }).catch(function(error){
     console.log("error: "+error);
@@ -46,6 +45,8 @@ document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
     }
 });
 
+//Adds the item to the user's collection if it doesn't exist.
+//If it exists, increments the recycleNum by one. 
 function userRecycled(){
   let item = document.getElementById("name").textContent.toLowerCase;
   let user = firebase.auth().currentUser;

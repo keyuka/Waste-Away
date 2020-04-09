@@ -6,7 +6,6 @@ window.onload = function () {
         console.log("The hash was passed!");
         userSearch = window.location.hash.substring(1);
         userSearch = userSearch.replace(/%20/g, " ").toLowerCase()
-        console.log(userSearch);
         showItem(userSearch);
     }
 
@@ -29,14 +28,13 @@ window.onload = function () {
 //Initiates item search function.
 document.getElementById("searchButton").onclick = function () {
     userSearch = document.getElementById("userInput").value;
-    console.log(userSearch);
     showItem(userSearch);
 
 };
 
 //Retrieves the item's information from the DB.
 function showItem(userSearch) {
-
+    console.log(userSearch);
     db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
         document.getElementById("name").innerHTML = snap.data().name;
     }).catch(function (error) {
