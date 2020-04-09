@@ -43,7 +43,7 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="index.html"><span>Home</span> <span
                             class="sr-only">(current)</span></a>
-                   <a class="nav-item nav-link" href="add.html"><span>Add An Item</span></a>
+                    <a class="nav-item nav-link" href="add.html"><span>Add An Item</span></a>
                     <a class="nav-item nav-link active" href="HTML/login.html" id="signin"><span>Login/Create
                             Account</span></a>
                     <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
@@ -213,22 +213,25 @@
                 for (let i = 0; i < depotLocations.length; i++) {
                     areas += (i + 1) + ". " + depotLocations[i] + "\n";
                 }
-                console.log(depotLocations);
+                console.log("added: " + depotLocations);
                 locationFill.value = areas;
             }
 
             //-----------------------------------------------------------
             let tagList = [];
-
+            //Tags
             function getTags() {
-                //Get string and remove everything but words and store them into array 
                 let tags = tagIn.value.replace(/ /g, '');
-                //add array to tags
                 tagList = tags.split(',');
             }
-
             sendIn.onclick = function send() {
                 getTags();
+                //Handles empty item name
+                if (firstFile == undefined) {
+                    window.alert("Enter at least item name.");
+                    throw "Item name not entered.."
+                }
+                //Send image to storage
                 storageRef.put(firstFile).then(function (snapshot) {
                     console.log(getFile("Uploaded: " + reference));
                 })
@@ -236,14 +239,16 @@
                 let dI = disposalIn.value;
                 let oI = otherIn.value;
                 let eI = extraIn.value;
-                if(oI.length > 0) {
+                if (oI.length > 0) {
                     depotLocations.push(oI);
                 }
+                //Logs data being sent
                 console.log(wI);
                 console.log(dI);
                 console.log(tagList);
                 console.log(oI);
                 console.log(eI);
+                //Sends data to database
                 db.collection("requests").doc(wI).set({
                         name: wI,
                         disposal_method: dI,
@@ -252,7 +257,6 @@
                         other_location: oI,
                         extra_info: eI,
                         picture_ref: reference
-
                     })
                     .then(function (docRef) {
                         console.log("Document written with ID: ", wI);
@@ -264,7 +268,7 @@
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
-                        window.alert("I have no idea what went wrong, but something did.");
+                        window.alert("Something went wrong.");
                     });
             }
         </script>
