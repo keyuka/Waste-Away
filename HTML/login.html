@@ -26,7 +26,7 @@
 </head>
 <body>
     <!----------------------->
-    <!--  HTML Section -->
+    <!--  HTML Section     -->
     <!----------------------->
     <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
         <a class="navbar-brand" href="../index.html">Waste Away</a>
@@ -80,8 +80,11 @@
                     if (authResult.additionalUserInfo.isNewUser) {
                         db.collection("users").doc(user.uid).set({
                                 name: user.displayName,
-                                email: user.email
+                                email: user.email,
                             }).then(function () {
+                                db.collection("user_" + user.displayName).doc("placeholder").set({
+                                    placeholder: "placeholder"
+                                })
                                 console.log("New user added to firestore");
                                 window.location.assign("../index.html");
                             })

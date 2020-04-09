@@ -1,33 +1,28 @@
-body {
-    background-color: white;
-}
 
 .browseNavBar {
     position: relative;
-    height: 40vh;
+    height: 30vh;
     margin-top: 15px;
-    overflow-y:visible;
+    overflow-y: visible;
 }
-
-#browse {
-    padding-top: 50px;
+.navbar-light {
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
 }
-
 .scrolling-wrapper {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
 }
+
 .card {
       flex: 0 0 auto;
 }
 
-
 #wasteAway{
     position: relative;
     text-align: center;
-    padding-top: 120px;
-    padding-bottom: 30px;
+    padding-top: 100px;
+    padding-bottom: 10px;
 }
 
 #searchBar{
@@ -101,6 +96,15 @@ body {
 .noDisplay {
     display:none;
 }
+
+.cardimg {
+    display: block;
+    width: 8em;
+    height: 10em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #userInput{
     height: 29px;
     width: 60%;

@@ -1,4 +1,4 @@
-<DOCTYPE HTML>
+<!DOCTYPE HTML>
     <html>
 
     <head>
@@ -29,7 +29,7 @@
 
         <!--HTML-->
         
-        <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top" data-spy="affix" data-offset-top="197">
             <a class="navbar-brand" href="index.html">Waste Away</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -46,11 +46,9 @@
         </nav>
 
         <h1 id="wasteAway">Waste Away</h1>
-        <!-- This is the search bar. We need to fix this as we scroll.-->
-        
+        <h5>Recycling made easy</h5>
 
-        
-          
+        <!-- This is the search bar. We need to fix this as we scroll.-->
             <div id = "searchFunction">
                 <input type="text" id="userInput" placeholder="Search for an item..." />
                 <button id="itemInfo" class="searchButton">Search</button>
@@ -59,7 +57,7 @@
         <!-- This is the browse section. It should affix as we scroll, or be its on sections -->
 
         <div id="browse">
-            <nav id="browse-navbar" class="navbar navbar-light">
+            <nav id="browse-navbar" class="navbar navbar-light sticky-top">
                 <h3 class="navbar-brand">Browse</h3>
                 <!--Populated in JS file-->
                 <ul class="nav nav-pills" id="navigation"></ul>
@@ -106,10 +104,8 @@
         <!--            Our own JS files               --> 
         <!----------------------------------------------->
         <script src="scripts/firebase_api.js"> </script>
-        <script src="scripts/search.js"></script>
         <script src="scripts/index.js"> </script>
 
     </body>
    
-    </html>
-</DOCTYPE>
+</html>

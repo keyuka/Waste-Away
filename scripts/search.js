@@ -36,6 +36,16 @@ function showItem(userSearch) {
         } else {
             document.getElementById("image").appendChild(img);
         }
+        db.collection('items').doc(userSearch.toLowerCase()).update({
+            visits: snap.data().visits + 1
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+        })
+        .catch(function(error) {
+            console.error("Error updating document: ", error);
+        });
+
     }).catch(function (error) {
         console.log("Could not find Item: ", error);
     });
