@@ -33,7 +33,7 @@
         <script src="scripts/firebase_api.js"> </script>
 
         <!--Header Navigation Bar-->
-        <nav class="navbar navbar-expand-lg navbar-light" data-spy="affix" data-offset-top="197">
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top" data-spy="affix" data-offset-top="197">
             <a class="navbar-brand" href="index.html">Waste Away</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,7 +157,6 @@
                         docArray.push(doc.data());
                     })
                 }).then(function (something) {
-                    console.log(docArray);
                     addDrop();
                 });
             }
@@ -214,22 +213,25 @@
                 for (let i = 0; i < depotLocations.length; i++) {
                     areas += (i + 1) + ". " + depotLocations[i] + "\n";
                 }
-                console.log(depotLocations);
+                console.log("added: " + depotLocations);
                 locationFill.value = areas;
             }
 
             //-----------------------------------------------------------
             let tagList = [];
-
+            //Tags
             function getTags() {
-                //Get string and remove everything but words and store them into array 
                 let tags = tagIn.value.replace(/ /g, '');
-                //add array to tags
                 tagList = tags.split(',');
             }
-
             sendIn.onclick = function send() {
                 getTags();
+                //Handles empty item name
+                if (firstFile == undefined) {
+                    window.alert("Enter at least item name.");
+                    throw "Item name not entered.."
+                }
+                //Send image to storage
                 storageRef.put(firstFile).then(function (snapshot) {
                     console.log(getFile("Uploaded: " + reference));
                 })
@@ -237,12 +239,16 @@
                 let dI = disposalIn.value;
                 let oI = otherIn.value;
                 let eI = extraIn.value;
-                depotLocations.push(oI);
+                if (oI.length > 0) {
+                    depotLocations.push(oI);
+                }
+                //Logs data being sent
                 console.log(wI);
                 console.log(dI);
                 console.log(tagList);
                 console.log(oI);
                 console.log(eI);
+                //Sends data to database
                 db.collection("requests").doc(wI).set({
                         name: wI,
                         disposal_method: dI,
@@ -251,7 +257,6 @@
                         other_location: oI,
                         extra_info: eI,
                         picture_ref: reference
-
                     })
                     .then(function (docRef) {
                         console.log("Document written with ID: ", wI);
@@ -263,9 +268,15 @@
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
-                        window.alert("I have no idea what went wrong, but something did.");
+                        window.alert("Something went wrong.");
                     });
             }
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    document.getElementById("signin").classList.add("noDisplay");
+                    document.getElementById("signout").classList.remove("noDisplay");
+                }
+            });
         </script>
 
     </body>

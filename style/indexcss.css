@@ -1,33 +1,40 @@
-body {
-    background-color: white;
-}
 
 .browseNavBar {
     position: relative;
-    height: 40vh;
+    height: 30vh;
     margin-top: 15px;
-    overflow-y:visible;
+    overflow-y: visible;
 }
 
-#browse {
-    padding-top: 50px;
+.navbar-light {
+    box-shadow: 0 4px 2px -2px rgba(0,0,0,.2);
+}
+
+.nav-link {
+    color: black;
 }
 
 .scrolling-wrapper {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
+
 .card {
       flex: 0 0 auto;
 }
 
-
 #wasteAway{
     position: relative;
     text-align: center;
-    padding-top: 120px;
-    padding-bottom: 30px;
+    padding-top: 100px;
+    padding-bottom: 10px;
+}
+
+h5{
+    position: relative;
+    text-align: center;
 }
 
 
@@ -36,38 +43,18 @@ body {
     position: relative;
 }
 
-
-
 #image{
     display: block;
     margin-left: auto;
     margin-right: auto;
-    }
+}
 
 #item{
     width: 95%;
 }
 
-#search{
-
-    width: 95%;
-}
-#locations{
-    width: 95%;
-}
-#addInfo{
-
-    width: 95%;
-}
-
 #submitButton{
-  text-align: center;
-}
-
-.affix {
-    top: 0;
-    width: 100%;
-    z-index: 9999;
+    text-align: center;
 }
 
 .cardindex {
@@ -100,10 +87,18 @@ body {
 .noDisplay {
     display:none;
 }
+
+.cardimg {
+    display: block;
+    width: 8em;
+    height: 10em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #userInput{
     height: 29px;
     width: 60%;
-
 }
 
 #searchButton{
@@ -113,18 +108,15 @@ body {
     background-color:rgb(68, 136, 68);
 
 }
+
 #searchFunction{
     margin-top: 20px;
     text-align: center;
-
-
 }
-
 
 #title{
     margin-top: 40px;
     margin-left: 120px;
-
 }
 
 #logo{
@@ -132,11 +124,6 @@ body {
     margin-left: 10px;
     height: 100px;
     width: 100px;
-
-}
-
-#header{
-    margin-top: 70px;
 }
 
 @media only screen and (max-width: 400px) {
