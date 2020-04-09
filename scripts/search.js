@@ -60,16 +60,13 @@ function showItem(userSearch) {
             console.error("Error updating document: ", error);
         });
 
-    }).catch(function (error) {
-        console.log("Could not find Item: ", error);
+ 
     });
 
     db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
         document.getElementById("disposalLocation").innerHTML = "Disposal Location:";
         document.getElementById("location").innerHTML = snap.data().disposal_location;
-        
-    }).catch(function (error) {
-        console.log("Could not find Item: ", error);
+  
     });
 
     db.collection('items').doc(userSearch.toLowerCase()).get().then(function (snap) {
@@ -77,8 +74,7 @@ function showItem(userSearch) {
       
         document.getElementById("method").innerHTML = snap.data().disposal_method;
 
-    }).catch(function (error) {
-        console.log("Could not find Item: ", error);
+   
     });
 }
 
