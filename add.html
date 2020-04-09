@@ -53,9 +53,15 @@
 
         <div class="container-fluid">
             <br>
+
+            <p class="text-left">This form will send a request to the team for an item to be added.
+                fill in as much information as you know to help the team identify your item,
+                leave the boxes empty otherwise.</p>
+
+            <br>
             <!--Add image here-->
             <div class="input-group-prepend">
-                <span class="input-group-text" id="wasteImg">Waste Item image</span>
+                <span class="input-group-text" id="wasteImg">Add Item image</span>
             </div>
             <input type="file" accept="image/*" capture="camera" id="imageIn">
             <br>
@@ -128,17 +134,24 @@
 
         </div>
         <script>
-            let storageRef = firebase.storage().ref('request_images');
+            //Gets file name by getting everything after \\
+            function getFile(filePath) {
+                return filePath.substr(filePath.lastIndexOf('\\') + 1);
+            }
+            //Variables used to upload file.
             let fileUpload = document.getElementById("imageIn");
-
+            let reference;
+            let firstFile;
+            let storageRef;
+            //Updates all variables for pushing on submit button
             fileUpload.addEventListener('change', function (evt) {
-                let firstFile = evt.target.files[0] // upload the first file only
-                let uploadTask = storageRef.put(firstFile)
-                console.log(1);
+                reference = getFile(imageIn.value);
+                storageRef = firebase.storage().ref(reference);
+                firstFile = evt.target.files[0] // upload the first file only
             })
             let docArray = [];
-
-            function getLocation() {
+            //Gets data from firebase
+            function getData() {
                 db.collection("depot-info").get().then(function (querySnapshot) {
                     querySnapshot.forEach(function (doc) {
                         docArray.push(doc.data());
@@ -148,7 +161,7 @@
                     addDrop();
                 });
             }
-            getLocation();
+            getData();
 
             function addDrop() {
                 let dropper = document.querySelector('.dropdown-menu');
@@ -217,6 +230,9 @@
 
             sendIn.onclick = function send() {
                 getTags();
+                storageRef.put(firstFile).then(function (snapshot) {
+                    console.log(getFile("Uploaded: " + reference));
+                })
                 let wI = wasteIn.value;
                 let dI = disposalIn.value;
                 let oI = otherIn.value;
@@ -233,8 +249,9 @@
                         disposal_locations: depotLocations,
                         tags: tagList,
                         other_location: oI,
-                        extra_info: eI
-                        //picture
+                        extra_info: eI,
+                        picture_ref: reference
+
                     })
                     .then(function (docRef) {
                         console.log("Document written with ID: ", wI);
@@ -246,7 +263,7 @@
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
-                        window.alert("I have no idea waht went wrong, but something did.");
+                        window.alert("I have no idea what went wrong, but something did.");
                     });
             }
         </script>
