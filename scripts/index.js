@@ -5,7 +5,7 @@ const BASECONTENT = 5;
 let commonContent = [];
 let commonCardNumber = 0;
 itemsRef = db.collection("items");
-document.getElementById("itemInfo").onclick = openItemPage;
+document.getElementById("searchButton").onclick = openItemPage;
 
 document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
     console.log(user);
