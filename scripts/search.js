@@ -5,10 +5,12 @@ window.onload = function () {
     if (window.location.hash) {
         console.log("The hash was passed!");
         userSearch = window.location.hash.substring(1);
+        userSearch = userSearch.replace(/%20/g, " ").toLowerCase()
+        console.log(userSearch);
         showItem(userSearch);
     }
 
-    //Adds a button if the user is logged in.
+    //Adds a "I recycled" button if the user is logged in, and adds the sign out button to the navbar.
     firebase.auth().onAuthStateChanged(function(user) {
 
         if (user) {
@@ -27,7 +29,7 @@ window.onload = function () {
 //Initiates item search function.
 document.getElementById("searchButton").onclick = function () {
     userSearch = document.getElementById("userInput").value;
-
+    console.log(userSearch);
     showItem(userSearch);
 
 };
