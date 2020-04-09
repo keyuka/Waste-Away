@@ -236,7 +236,9 @@
                 let dI = disposalIn.value;
                 let oI = otherIn.value;
                 let eI = extraIn.value;
-                depotLocations.push(oI);
+                if(oI.length > 0) {
+                    depotLocations.push(oI);
+                }
                 console.log(wI);
                 console.log(dI);
                 console.log(tagList);
