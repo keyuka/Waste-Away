@@ -13,8 +13,8 @@ document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
         userItemRef = db.collection("user_" + user.displayName);
 
         document.getElementById("history").innerHTML = '<div class="card-body">'
-            + '<h4 class="card-title">Your Previous Searches</h4>'
-            + '<h6 class="card-subtitle mb-2 text-muted">A history of your recycling</h6>'
+            + '<h4 class="card-title">What you have previously recycled</h4>'
+            + '<h6 class="card-subtitle mb-2 text-muted">Deferred from landfills, great job!</h6>'
             + '<div id="previous-content"></div></div>';
     
         document.getElementById("signin").classList.add("noDisplay");

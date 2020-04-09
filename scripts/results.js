@@ -31,11 +31,14 @@ db.collection("items").where(userSearch.toLowerCase(), "==", true)
     })
 
 //Add button if user is logged in.
-firebase.auth().onAuthStateChanged(function(user) {
+document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
+
     if (user) {
-      console.log(1);
+      document.getElementById("signin").classList.add("noDisplay");
+      document.getElementById("signout").classList.remove("noDisplay");
+
       let btn = document.createElement("button");
-      btn.classList.add("btn btn-primary btn-lg btn-block");
+      btn.classList.add("btn btn-primary btn-lg btn-block sticky-bottom");
       btn.id = "userRecycled";
       btn.innerHTML = "I just recycled this!";
       btn.onclick = userRecycled;
