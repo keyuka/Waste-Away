@@ -14,7 +14,6 @@
 
     <body>
         <!--Bootstrap copy-->
-
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
         </script>
@@ -43,8 +42,8 @@
                 <div class="navbar-nav">
                     <a class="nav-item nav-link" href="index.html"><span>Home</span> <span
                             class="sr-only">(current)</span></a>
-                    <a class="nav-item nav-link" href="add.html"><span>Add An Item</span></a>
-                    <a class="nav-item nav-link active" href="HTML/login.html" id="signin"><span>Login/Create
+                    <a class="nav-item nav-link active" href="add.html"><span>Add An Item</span></a>
+                    <a class="nav-item nav-link" href="HTML/login.html" id="signin"><span>Login/Create
                             Account</span></a>
                     <a class="nav-item nav-link noDisplay" id="signout" onclick="signOut()"><span>Sign Out</span></a>
                 </div>
@@ -130,9 +129,8 @@
             <br>
             <!--Push to database-->
             <button type="button" id="sendIn" class="btn btn-success">Send Request</button>
-
-
         </div>
+
         <script>
             //Gets file name by getting everything after \\
             function getFile(filePath) {
@@ -248,6 +246,7 @@
                 console.log(tagList);
                 console.log(oI);
                 console.log(eI);
+
                 //Sends data to database
                 db.collection("requests").doc(wI).set({
                         name: wI,
@@ -271,6 +270,8 @@
                         window.alert("Something went wrong.");
                     });
             }
+
+            //Sign in/out depending if user is signed in.
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
                     document.getElementById("signin").classList.add("noDisplay");

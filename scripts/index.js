@@ -10,6 +10,7 @@ document.getElementById("itemInfo").onclick = openItemPage;
 //Loads user specific features on the home page.
 document.body.onload = firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+        //Reads the user's specific collection.
         userItemRef = db.collection("user_" + user.displayName);
 
         document.getElementById("history").innerHTML = '<div class="card-body">'
@@ -35,6 +36,7 @@ window.onload = function() {
     let common = document.getElementById("commonCards");
     let commonCardNumber = 0;
 
+    //Read the item collection and sorts the items by visits.
     itemsRef.orderBy("visits", "desc").limit(BASECONTENT).get().then(function(querySnapshot) {     
         querySnapshot.forEach(function(doc) {  
             let lower = doc.data().name;
@@ -46,7 +48,7 @@ window.onload = function() {
                 + '<img src = "images/' + doc.data().picture_ref 
                 + '" class="cardimg" alt="Item 1">'
                 + '<div class="card-body">'
-                + '<p class="card-text">Times Searched: ' + doc.data().visits + '</p>'
+                + '<p class="card-text">Times Viewed: ' + doc.data().visits + '</p>'
                 + '<a href="HTML/results.html#' + doc.data().name + '" class="btn btn-primary stretched-link">Go to page</a>'
                 + '</div></div>';
             commonCardNumber++;
@@ -68,7 +70,8 @@ function populateHistory(){
         + '</thead>'
         + '<tbody id="tbody"></tbody>'
     + '</table>'
-
+    
+    //Read the item collection and sorts the items by visits.
     userItemRef.orderBy("recycleNum", "desc").get().then(function(querySnapshot) {     
         querySnapshot.forEach(function(doc) {  
                 let lower = doc.data().name;
