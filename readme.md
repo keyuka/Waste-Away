@@ -35,7 +35,6 @@ Content of the project folder:
  HTML folder files: 
 ├── login.html              # Firebase file
 ├── results.html            # Firebase file
-├── searcher.html           # Firebase file
 
  images folder files:
 ├── banana.png               # Image of item
