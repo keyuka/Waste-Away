@@ -6,7 +6,7 @@
 ## Info
 This application allows users to search or browse for an item and determine its disposal
 information, including method and depot, if applicable. Users may login in and see what they
-have previously recycled/disposed of safetly, which is recorded by pressing a button on the given item's page. If an item is missing, users my submit a request composed of the item's name, disposal method and location, and/or image.
+have previously recycled/disposed of safetly, which is recorded by pressing a button on the given item's page. If an item is missing, users may submit a request composed of the item's name, disposal method and location, and/or image.
 	
 ## Technologies
 Technologies that were used for this project:
